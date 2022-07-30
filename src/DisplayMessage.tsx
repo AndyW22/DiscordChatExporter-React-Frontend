@@ -21,6 +21,7 @@ const DisplayMessage = ({ index, message }: Props) => {
         <div className='name'>{message.author.name}</div>
         <div className='name'>ID: {message.id}</div>
         <div className='name'>Index: {index}</div>
+        <div className='name'>Date: {new Date(message.timestamp).toLocaleString()}</div>
       </div>
       <div className='content'>{message.content}</div>
       {message.embeds.map((embed) => (
