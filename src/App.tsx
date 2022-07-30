@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ScrollTrigger from 'react-scroll-trigger';
 import './App.css';
 import DisplayMessage from './DisplayMessage';
 import exportedMessages from './exportedMessages.json';
@@ -6,20 +7,35 @@ import { Message } from './types';
 
 function App() {
   const messages = exportedMessages as Message[];
+  const possibleScrollTriggerMessages = messages.filter(
+    (item, i) => i % 50 === 0
+  );
   const [searchInput, setSearchInput] = useState('');
   const [idInput, setIdInput] = useState('');
+  const [loading, setLoading] = useState(false);
   const [discordMessages, setDiscordMessages] = useState<Message[]>(messages);
+  const [displayMessages, setDisplayMessages] = useState<Message[]>([]);
   useEffect(() => {
+    if (!searchInput) {
+      setDiscordMessages(messages);
+    }
     setDiscordMessages((discordMessages) =>
       discordMessages.filter((message) => message.content.includes(searchInput))
     );
-  }, [searchInput]);
+  }, [searchInput, messages]);
 
   useEffect(() => {
+    if (!idInput) {
+      setDiscordMessages(messages);
+    }
     setDiscordMessages((discordMessages) =>
       discordMessages.filter((message) => message.id.includes(idInput))
     );
-  }, [idInput]);
+  }, [idInput, messages]);
+
+  useEffect(() => {
+    setDisplayMessages(discordMessages.slice(0, 50));
+  }, [discordMessages]);
 
   return (
     <div className='app'>
@@ -45,10 +61,26 @@ function App() {
         <input onChange={(e) => setIdInput(e.target.value)} value={idInput} />
       </div>
       <div className='list-container'>
-        {discordMessages.map((message) => (
-          <DisplayMessage message={message} />
+        {displayMessages.map((message, i) => (
+          <DisplayMessage message={message} index={i} />
         ))}
       </div>
+      <ScrollTrigger
+        onEnter={() => {
+          setLoading(true);
+          // get last message index
+          const lastId = displayMessages.pop()?.id;
+          const currentIndex = discordMessages.findIndex(
+            (item) => item.id === lastId
+          );
+          setDisplayMessages((displayMessages) => [
+            ...displayMessages,
+            ...discordMessages.slice(currentIndex, currentIndex + 50),
+          ]);
+          setLoading(false);
+        }}
+      />
+      <div>{loading && <>Loading...</>}</div>
     </div>
   );
 }

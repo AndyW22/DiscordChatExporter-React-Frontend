@@ -4,9 +4,10 @@ import { Message } from './types';
 
 interface Props {
   message: Message;
+  index: number;
 }
 
-const DisplayMessage = ({ message }: Props) => {
+const DisplayMessage = ({ index, message }: Props) => {
   return (
     <div className='container'>
       <div className='top-container'>
@@ -18,6 +19,7 @@ const DisplayMessage = ({ message }: Props) => {
           height={40}
         />
         <div className='name'>{message.author.name}</div>
+        <div className='name'>{index}</div>
         <div className='name'>id: {message.id}</div>
       </div>
       <div className='content'>{message.content}</div>
