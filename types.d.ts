@@ -34,6 +34,21 @@ export interface Message {
   isPinned: boolean;
   content: string;
   author: Author;
+  embeds: Embed[];
+  attachments: Attachment[];
+}
+
+export interface Embed {
+  title: string;
+  url: string;
+  timestamp: string;
+  description: string;
+}
+
+export interface Attachment {
+  id: string;
+  url: string;
+  fileName: string;
 }
 
 export interface Author {

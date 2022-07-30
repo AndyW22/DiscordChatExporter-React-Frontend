@@ -23,6 +23,16 @@ export const main = async () => {
       avatarUrl: message.author.avatarUrl,
       name: message.author.name,
     },
+    embeds:
+      message.embeds.map((item) => ({
+        url: item.url,
+        title: item.title,
+        timestamp: item.timestamp,
+      })) ?? [],
+    attachments:
+      message.attachments.map((item) => ({
+        url: item.url,
+      })) ?? [],
   }));
   const exportedJson = JSON.stringify(mappedMessages);
   fs.writeFile('exportedMessages.json', exportedJson, () =>

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node main.ts"
+    "start": "ts-node main.ts && cp ./exportedMessages.json ../frontend/src/"
   },
   "devDependencies": {
     "@types/node": "^18.6.2",
