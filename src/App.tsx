@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import DisplayMessage from './DisplayMessage';
+import exportedMessages from './exportedMessages.json';
+import { Message } from './types';
 
 function App() {
+  const messages = exportedMessages as Message[];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <div className='heading'>Discord Message Renderer</div>
+      <div className='secondary-heading'>
+        Total messages: <span className='bold'>{messages.length}</span>
+      </div>
+      <div className='secondary-heading'>
+        Earliest Date: <span className='bold'>{messages[0].timestamp}</span>
+      </div>
+      <div className='secondary-heading'>
+        Latest Date: <span className='bold'>{messages.pop()?.timestamp}</span>
+      </div>
+      <div className='list-container'>
+        {messages.map((message) => (
+          <DisplayMessage message={message} />
+        ))}
+      </div>
     </div>
   );
 }
