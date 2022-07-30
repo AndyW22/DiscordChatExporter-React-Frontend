@@ -19,8 +19,8 @@ const DisplayMessage = ({ index, message }: Props) => {
           height={40}
         />
         <div className='name'>{message.author.name}</div>
-        <div className='name'>{index}</div>
-        <div className='name'>id: {message.id}</div>
+        <div className='name'>ID: {message.id}</div>
+        <div className='name'>Index: {index}</div>
       </div>
       <div className='content'>{message.content}</div>
       {message.embeds.map((embed) => (

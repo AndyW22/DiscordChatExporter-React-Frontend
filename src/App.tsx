@@ -48,11 +48,11 @@ function App() {
         <span className='bold'>{displayMessages.length}</span>
       </div>
       <div className='secondary-heading'>
-        Earliest Date:
+        Earliest Date:{' '}
         <span className='bold'>{displayMessages?.[0]?.timestamp}</span>
       </div>
       <div className='secondary-heading'>
-        Latest Date:
+        Latest Date:{' '}
         <span className='bold'>
           {displayMessages[displayMessages.length - 1]?.timestamp}
         </span>
@@ -79,7 +79,7 @@ function App() {
         onEnter={() => {
           setLoading(true);
           // get last message index
-          const lastId = displayMessages.pop()?.id;
+          const lastId = displayMessages[displayMessages.length - 1]?.id;
           const currentIndex = messages.findIndex((item) => item.id === lastId);
           if (currentIndex < 0) {
             setLoading(false);
@@ -87,7 +87,7 @@ function App() {
           }
           setDisplayMessages((displayMessages) => [
             ...displayMessages,
-            ...discordMessages.slice(currentIndex, currentIndex + 51),
+            ...discordMessages.slice(currentIndex, currentIndex + 50),
           ]);
           setLoading(false);
         }}
