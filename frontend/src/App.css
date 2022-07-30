@@ -1,0 +1,33 @@
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
+.heading {
+  font-weight: 500;
+  font-size: 28px;
+  margin: 15px 0;
+}
+
+.secondary-heading {
+  font-size: 24px;
+  margin: 10px 0;
+}
+.bold {
+  font-weight: 500;
+}
+
+.app {
+  margin: 40px;
+  margin-top: 10px;
+}
+
+.search-container {
+  margin: 10px 0;
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}

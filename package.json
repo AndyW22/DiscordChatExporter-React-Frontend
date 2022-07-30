@@ -1,0 +1,11 @@
+{
+  "name": "discord-logging",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd json-processor && npm run-script build && cd ../frontend/ && npm run-script build && serve -s build"
+  },
+  "author": "",
+  "license": "ISC"
+}
